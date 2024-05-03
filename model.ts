@@ -4,9 +4,9 @@ const dailyFileRe = /^\d{4}-\d{2}-\d{2}\.md$/;
 const dailyRe = /^\d{4}-\d{2}-\d{2}$/;
 
 // source file -> texts where day (target) is mentioned
-type Mentions = Record<string, Array<string>>;
+export type Mentions = Record<string, Array<string>>;
 // day file (target) -> source file -> mentions
-type FutureNotes = Record<string, Mentions>;
+export type FutureNotes = Record<string, Mentions>;
 
 export default class Model extends EventTarget {
 	notes: FutureNotes = {};

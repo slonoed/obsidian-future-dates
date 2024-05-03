@@ -17,7 +17,10 @@ class ObsidianFutureDatesPlugin extends Plugin {
 			this.initLeaf();
 		} else {
 			this.registerEvent(
-				this.app.workspace.on("layout-ready", this.initLeaf.bind(this))
+				(this.app.workspace as any).on(
+					"layout-ready",
+					this.initLeaf.bind(this)
+				)
 			);
 		}
 	}
@@ -34,9 +37,12 @@ class ObsidianFutureDatesPlugin extends Plugin {
 		if (this.app.workspace.getLeavesOfType(FutureDatesView.TYPE).length) {
 			return;
 		}
-		this.app.workspace.getRightLeaf(false).setViewState({
-			type: FutureDatesView.TYPE,
-		});
+		const rightLeaf = this.app.workspace.getRightLeaf(false);
+		if (rightLeaf) {
+			rightLeaf.setViewState({
+				type: FutureDatesView.TYPE,
+			});
+		}
 	}
 }
 

@@ -1,5 +1,5 @@
 import { ItemView, WorkspaceLeaf, Workspace } from "obsidian";
-import Model from "./model";
+import Model, { type FutureNotes } from "./model";
 
 export default class View extends ItemView {
 	static TYPE = "obsidian-future-dates-view";
@@ -42,7 +42,7 @@ export default class View extends ItemView {
 		cont.children[1].appendChild(wrapper);
 	}
 
-	createDatesList(notes) {
+	createDatesList(notes: FutureNotes) {
 		const datesList = document.createElement("ul");
 		Object.keys(notes)
 			.sort()
@@ -54,7 +54,7 @@ export default class View extends ItemView {
 		return datesList;
 	}
 
-	createDateItem(date, files) {
+	createDateItem(date: string, files: Record<string, Array<string>>) {
 		const dateItem = document.createElement("li");
 		const dateLink = this.createLink(date, date);
 		dateItem.appendChild(dateLink);
@@ -65,7 +65,7 @@ export default class View extends ItemView {
 		return dateItem;
 	}
 
-	createFilesList(files) {
+	createFilesList(files: Record<string, Array<string>>) {
 		const filesList = document.createElement("ul");
 		for (const file in files) {
 			const fileItem = this.createFileItem(file, files[file]);
@@ -74,7 +74,7 @@ export default class View extends ItemView {
 		return filesList;
 	}
 
-	createFileItem(file, mentions) {
+	createFileItem(file: string, mentions: Array<string>) {
 		const fileItem = document.createElement("li");
 		const fileLink = this.createLink(file, file);
 		fileItem.appendChild(fileLink);
@@ -85,7 +85,7 @@ export default class View extends ItemView {
 		return fileItem;
 	}
 
-	createMentionsList(mentions) {
+	createMentionsList(mentions: Array<string>) {
 		const mentionsList = document.createElement("ul");
 		for (const mention of mentions) {
 			const mentionItem = document.createElement("li");
