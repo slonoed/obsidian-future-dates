@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-future-dates-plugin",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Show list of future dates in vault",
 	"main": "main.js",
 	"scripts": {
