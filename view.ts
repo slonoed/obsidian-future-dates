@@ -20,7 +20,7 @@ export default class View extends ItemView {
 	}
 
 	getDisplayText(): string {
-		return "My Custom View";
+		return "Future dates";
 	}
 
 	async onOpen() {
