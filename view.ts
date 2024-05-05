@@ -23,6 +23,10 @@ export default class View extends ItemView {
 		return "Future dates";
 	}
 
+	getIcon(): string {
+		return "file-clock";
+	}
+
 	async onOpen() {
 		this.renderContent();
 	}
