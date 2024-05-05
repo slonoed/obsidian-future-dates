@@ -1,9 +1,10 @@
 {
 	"id": "future-dates",
 	"name": "Future Dates",
+	"version": "1.3.1",
 	"minAppVersion": "0.15.0",
 	"description": "Show list of future dates in vault",
 	"author": "Dmitry Manannikov",
 	"authorUrl": "https://slonoed.net",
-	"isDesktopOnly": false
+	"isDesktopOnly": true
 }
