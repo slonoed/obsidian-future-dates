@@ -1,6 +1,6 @@
 {
-	"id": "obsidian-future-dates-plugin",
-	"name": "Future Dates Plugin",
+	"id": "future-dates",
+	"name": "Future Dates",
 	"minAppVersion": "0.15.0",
 	"description": "Show list of future dates in vault",
 	"author": "Dmitry Manannikov",
