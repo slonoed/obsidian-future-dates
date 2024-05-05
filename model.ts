@@ -1,12 +1,12 @@
 import { Plugin, moment, TFile } from "obsidian";
-
-const dailyFileRe = /^\d{4}-\d{2}-\d{2}\.md$/;
-const dailyRe = /^\d{4}-\d{2}-\d{2}$/;
+import { getDailyNoteSettings } from "obsidian-daily-notes-interface";
 
 // source file -> texts where day (target) is mentioned
 export type Mentions = Record<string, Array<string>>;
 // day file (target) -> source file -> mentions
 export type FutureNotes = Record<string, Mentions>;
+
+const dailyRe = /^\d{4}-\d{2}-\d{2}$/;
 
 export default class Model extends EventTarget {
 	notes: FutureNotes = {};
@@ -89,11 +89,9 @@ export default class Model extends EventTarget {
 		const dates: Array<string> = [];
 		Object.values(links).forEach((files) => {
 			Object.keys(files).forEach((link) => {
-				if (dailyFileRe.test(link)) {
-					const date = link.slice(0, -3);
-					dates.push(date);
-				} else if (dailyRe.test(link)) {
-					dates.push(link);
+				const r = this.extractDate(link);
+				if (r) {
+					dates.push(r);
 				}
 			});
 		});
@@ -101,9 +99,18 @@ export default class Model extends EventTarget {
 	}
 
 	extractDate(fileName: string): string | null {
-		if (dailyFileRe.test(fileName)) {
-			return fileName.slice(0, -3);
+		if (fileName.endsWith(".md")) {
+			fileName = fileName.slice(0, -3);
 		}
+
+		const { format } = getDailyNoteSettings();
+		if (format) {
+			if (moment(fileName, format, true).isValid()) {
+				return fileName;
+			}
+			return null;
+		}
+
 		if (dailyRe.test(fileName)) {
 			return fileName;
 		}
