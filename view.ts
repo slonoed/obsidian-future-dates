@@ -41,8 +41,10 @@ export default class View extends ItemView {
 		const datesList = this.createDatesList(this.model.notes);
 		wrapper.appendChild(datesList);
 
-		// Clear existing content and append the new list structure
-		cont.children[1].innerHTML = "";
+		// Run loop instead of innerHTML = "" to avoid triggering obsidian bot
+		while (cont.children[1].firstChild) {
+			cont.children[1].removeChild(cont.children[1].firstChild);
+		}
 		cont.children[1].appendChild(wrapper);
 	}
 
@@ -93,7 +95,7 @@ export default class View extends ItemView {
 		const mentionsList = document.createElement("ul");
 		for (const mention of mentions) {
 			const mentionItem = document.createElement("li");
-			mentionItem.innerHTML = mention; // Be cautious with innerHTML due to potential security risks
+			mentionItem.innerText = mention;
 			mentionsList.appendChild(mentionItem);
 		}
 		return mentionsList;
