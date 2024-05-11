@@ -23,19 +23,9 @@ export default class Model extends EventTarget {
 		plugin.registerEvent(
 			cache.on("resolved", () => {
 				this.collectNotes();
-				this.dates = [
-					...this.extractDates(cache.resolvedLinks),
-					...this.extractDates(cache.unresolvedLinks),
-				];
-				this.dates.sort();
-
-				this.dates = this.dates.filter((date) => {
-					return !moment(date).isBefore(moment(), "day");
-				});
-
-				this.dispatchEvent(new Event("change"));
 			})
 		);
+		this.collectNotes();
 	}
 
 	finish() {}
