@@ -13,23 +13,12 @@ class ObsidianFutureDatesPlugin extends Plugin {
 			(leaf) => new FutureDatesView(leaf, this.model, this.app.workspace)
 		);
 
-		if (this.app.workspace.layoutReady) {
+		this.app.workspace.onLayoutReady(() => {
 			this.initLeaf();
-		} else {
-			this.registerEvent(
-				(this.app.workspace as any).on(
-					"layout-ready",
-					this.initLeaf.bind(this)
-				)
-			);
-		}
+		});
 	}
 
 	async onunload() {
-		this.app.workspace
-			.getLeavesOfType(FutureDatesView.TYPE)
-			.forEach((leaf) => leaf.detach());
-
 		this.model.finish();
 	}
 

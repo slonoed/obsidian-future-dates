@@ -41,10 +41,7 @@ export default class View extends ItemView {
 		const datesList = this.createDatesList(this.model.notes);
 		wrapper.appendChild(datesList);
 
-		// Run loop instead of innerHTML = "" to avoid triggering obsidian bot
-		while (cont.children[1].firstChild) {
-			cont.children[1].removeChild(cont.children[1].firstChild);
-		}
+		cont.children[1].empty();
 		cont.children[1].appendChild(wrapper);
 	}
 
